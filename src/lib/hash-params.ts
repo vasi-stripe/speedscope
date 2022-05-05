@@ -1,7 +1,19 @@
+import {ViewMode} from '../app-state'
+
 export interface HashParams {
   profileURL?: string
   title?: string
   localProfilePath?: string
+  view?: ViewMode
+}
+
+export function getViewMode(value: string): ViewMode | undefined {
+  switch (value) {
+    case 'chrono': return ViewMode.CHRONO_FLAME_CHART
+    case 'leftheavy': return ViewMode.LEFT_HEAVY_FLAME_GRAPH
+    case 'sandwich': return ViewMode.SANDWICH_VIEW
+  }
+  return undefined
 }
 
 export function getHashParams(hashContents = window.location.hash): HashParams {
@@ -20,6 +32,8 @@ export function getHashParams(hashContents = window.location.hash): HashParams {
         result.title = value
       } else if (key === 'localProfilePath') {
         result.localProfilePath = value
+      } else if (key == 'view') {
+        result.view = getViewMode(value)
       }
     }
     return result

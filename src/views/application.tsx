@@ -199,6 +199,10 @@ export class Application extends StatelessComponent<ApplicationProps> {
     }
     document.title = `${profileGroup.name} - speedscope`
 
+    if (this.props.hashParams.view) {
+      this.props.setViewMode(this.props.hashParams.view)
+    }
+
     for (let profile of profileGroup.profiles) {
       await profile.demangle()
     }

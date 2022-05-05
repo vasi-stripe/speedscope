@@ -1,3 +1,4 @@
+import { ViewMode } from '../app-state'
 import {getHashParams} from './hash-params'
 
 test('getHashParams', () => {
@@ -24,4 +25,6 @@ test('getHashParams', () => {
   })
   expect(getHashParams('#abc=bcd')).toEqual({})
   expect(getHashParams('garbage')).toEqual({})
+  expect(getHashParams('#view=foo')).toEqual({})
+  expect(getHashParams('#view=leftheavy')).toEqual({view: ViewMode.LEFT_HEAVY_FLAME_GRAPH})
 })
